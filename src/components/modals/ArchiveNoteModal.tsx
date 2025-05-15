@@ -1,5 +1,6 @@
 import { Archive } from "lucide-react"
 import { Modal } from "../ui/Modal"
+import { Button } from "../ui/button"
 
 interface ArchiveNoteModalProps {
   isOpen: boolean
@@ -28,18 +29,19 @@ export const ArchiveNoteModal = ({ isOpen, onClose, onConfirm }: ArchiveNoteModa
 
         {/* Actions */}
         <div className="flex items-center justify-end gap-3 px-6 py-4">
-          <button
+          <Button
+            variant="modalCancel"
             onClick={onClose}
-            className="px-6 py-2.5 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white font-medium hover:bg-gray-200 dark:hover:bg-gray-700"
           >
             Cancel
-          </button>
-          <button
+          </Button>
+          <Button
+            variant="modalAction"
+            className="bg-blue-500 hover:bg-blue-600"
             onClick={onConfirm}
-            className="px-6 py-2.5 rounded-lg bg-blue-500 text-white font-medium hover:bg-blue-600"
           >
             Archive Note
-          </button>
+          </Button>
         </div>
       </div>
     </Modal>

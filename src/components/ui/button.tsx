@@ -81,6 +81,51 @@ const variantStyles = {
     `disabled:bg-[${colors.disabled.background}]`,
     `disabled:text-[${colors.disabled.text}]`,
   ].join(' '),
+  
+  menuItem: [
+    'w-full flex items-center gap-3 px-4 py-3 rounded-[20px]',
+    'border border-gray-200 dark:border-gray-700/25',
+    'text-gray-900 dark:text-white',
+    'hover:bg-gray-100 dark:hover:bg-gray-800',
+    'transition-colors',
+    'text-lg',
+  ].join(' '),
+
+  modalCancel: [
+    'px-6 py-2.5 rounded-lg',
+    'bg-gray-100 dark:bg-gray-800',
+    'text-gray-900 dark:text-white font-medium',
+    'hover:bg-gray-200 dark:hover:bg-gray-700',
+  ].join(' '),
+
+  modalAction: [
+    'px-6 py-2.5 rounded-lg',
+    'text-white font-medium',
+    'transition-colors',
+  ].join(' '),
+
+  settingsItem: [
+    'flex items-center w-full px-4 py-3',
+    'text-gray-700 dark:text-gray-300',
+    'hover:bg-gray-100 dark:hover:bg-gray-800',
+    'transition-colors',
+  ].join(' '),
+
+  back: [
+    'flex items-center gap-2',
+    'text-gray-700 dark:text-gray-300',
+    'hover:text-gray-900 dark:hover:text-gray-100',
+    'transition-colors',
+  ].join(' '),
+
+  link: [
+    'font-medium',
+    'transition-colors',
+  ].join(' '),
+
+  ghost: [
+    'transition-colors',
+  ].join(' '),
 }
 
 // Size variants

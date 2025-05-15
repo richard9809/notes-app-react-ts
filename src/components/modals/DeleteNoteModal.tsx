@@ -1,5 +1,6 @@
 import { Trash2 } from "lucide-react"
 import { Modal } from "../ui/Modal"
+import { Button } from "../ui/button"
 
 interface DeleteNoteModalProps {
   isOpen: boolean
@@ -28,18 +29,19 @@ export const DeleteNoteModal = ({ isOpen, onClose, onConfirm }: DeleteNoteModalP
 
         {/* Actions */}
         <div className="flex items-center justify-end gap-3 px-6 py-4">
-          <button
+          <Button
+            variant="modalCancel"
             onClick={onClose}
-            className="px-6 py-2.5 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white font-medium hover:bg-gray-200 dark:hover:bg-gray-700"
           >
             Cancel
-          </button>
-          <button
+          </Button>
+          <Button
+            variant="modalAction"
+            className="bg-red-500 hover:bg-red-600"
             onClick={onConfirm}
-            className="px-6 py-2.5 rounded-lg bg-red-500 text-white font-medium hover:bg-red-600"
           >
             Delete Note
-          </button>
+          </Button>
         </div>
       </div>
     </Modal>

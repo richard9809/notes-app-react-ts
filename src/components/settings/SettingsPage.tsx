@@ -2,6 +2,7 @@ import { useState } from "react"
 import { ChevronLeft } from "lucide-react"
 import { SettingsLayout } from "./SettingsLayout"
 import { MobileSettingsMenu } from "./MobileSettingsMenu"
+import { Button } from "../ui/button"
 
 type SettingSection = "color-theme" | "font-theme" | "change-password" | null
 
@@ -63,13 +64,13 @@ export const SettingsPage = () => {
           <div className="flex flex-col h-full">
             {/* Header */}
             <div className="flex items-center h-14 px-4">
-              <button 
+              <Button
+                variant="back"
                 onClick={() => setActiveSection(null)}
-                className="flex items-center gap-2 text-gray-700 dark:text-gray-300"
               >
                 <ChevronLeft className="w-5 h-5" />
                 <span className="text-base font-medium">Settings</span>
-              </button>
+              </Button>
             </div>
 
             {/* Content */}
