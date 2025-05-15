@@ -1,4 +1,5 @@
 import { LogOut, Palette, Text, Lock } from "lucide-react"
+import { Button } from "../ui/button"
 
 interface MobileSettingsItemProps {
   icon: React.ReactNode
@@ -7,15 +8,15 @@ interface MobileSettingsItemProps {
 }
 
 const MobileSettingsItem = ({ icon, label, onClick }: MobileSettingsItemProps) => (
-  <button
+  <Button
+    variant="settingsItem"
     onClick={onClick}
-    className="flex items-center w-full px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
   >
     <div className="flex items-center gap-3">
       <div className="w-5 h-5">{icon}</div>
       <span className="text-base font-medium">{label}</span>
     </div>
-  </button>
+  </Button>
 )
 
 interface MobileSettingsMenuProps {

@@ -15,7 +15,7 @@ const NavItem: React.FC<NavItemProps> = ({ icon, label, isActive, onClick }) => 
     className={cn(
       "flex items-center w-full px-4 py-2 rounded-lg transition-colors text-gray-700 dark:text-gray-300",
       "hover:bg-gray-100 dark:hover:bg-gray-800",
-      isActive && "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400"
+      isActive && "bg-gray-100 dark:bg-gray-800"
     )}
   >
     <div className="flex items-center gap-3 flex-1">
@@ -40,7 +40,7 @@ const TagItem: React.FC<TagItemProps> = ({ label, isActive, onClick }) => (
     className={cn(
       "flex items-center w-full px-4 py-2 rounded-lg transition-colors text-gray-700 dark:text-gray-300",
       "hover:bg-gray-100 dark:hover:bg-gray-800",
-      isActive && "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400"
+      isActive && "bg-gray-100 dark:bg-gray-800"
     )}
   >
     <div className="flex items-center gap-3 flex-1">

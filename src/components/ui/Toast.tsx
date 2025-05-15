@@ -1,5 +1,6 @@
 import { Check, X } from "lucide-react"
 import { useEffect } from "react"
+import { Button } from "./button"
 
 interface ToastProps {
   message: string
@@ -36,19 +37,21 @@ export const Toast = ({ message, isOpen, onClose, action }: ToastProps) => {
         <div className="flex-1 flex items-center gap-4">
           <p className="text-gray-900 dark:text-white font-medium flex-1">{message}</p>
           {action && (
-            <button
-              onClick={action.onClick}
+            <Button
+              variant="link"
               className="text-gray-900 dark:text-white font-medium underline hover:text-gray-700 dark:hover:text-gray-300"
+              onClick={action.onClick}
             >
               {action.label}
-            </button>
+            </Button>
           )}
-          <button
+          <Button
+            variant="ghost"
+            className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 p-0"
             onClick={onClose}
-            className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
           >
             <X className="w-5 h-5" />
-          </button>
+          </Button>
         </div>
       </div>
     </div>

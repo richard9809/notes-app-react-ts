@@ -6,6 +6,7 @@ import { PageHeader } from "./components/PageHeader";
 import { SettingsPage } from "./components/settings/SettingsPage";
 import { Sidebar } from "./components/Sidebar";
 import { Toast } from "./components/ui/Toast";
+import { Button } from "./components/ui/button";
 
 function App() {
   // This will be replaced with proper routing later
@@ -41,18 +42,20 @@ function App() {
               <div className="px-4 py-8">
                 {/* Test buttons */}
                 <div className="flex gap-4">
-                  <button
+                  <Button
+                    variant="modalAction"
+                    className="bg-emerald-500 hover:bg-emerald-600"
                     onClick={() => setSaveToastOpen(true)}
-                    className="px-4 py-2 bg-emerald-500 text-white rounded-lg hover:bg-emerald-600"
                   >
                     Save Note
-                  </button>
-                  <button
+                  </Button>
+                  <Button
+                    variant="modalAction"
+                    className="bg-gray-500 hover:bg-gray-600"
                     onClick={() => setIsMenuOpen(true)}
-                    className="px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
                   >
                     Open Menu
-                  </button>
+                  </Button>
                 </div>
                 <p className="text-gray-500 dark:text-gray-400 mt-4">Notes list will appear here</p>
               </div>
