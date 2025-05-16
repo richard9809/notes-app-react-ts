@@ -3,171 +3,62 @@ import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
-// Theme colors
-const colors = {
-  primary: {
-    base: '#335CFF',
-    hover: '#2547D0',
-    active: '#335CFF',
-  },
-  neutral: {
-    white: '#FFFFFF',
-    background: '#F3F5F8',
-    border: '#CACFD8',
-    text: '#0E121B',
-    gray700: 'rgb(55, 65, 81)', // text-gray-700
-    gray900: 'rgb(17, 24, 39)', // text-gray-900
-  },
-  disabled: {
-    background: '#F3F5F8',
-    text: '#CACFD8',
-  },
-} as const
-
-// Base button styles
-const baseButtonStyles = [
-  'inline-flex',
-  'items-center',
-  'justify-center',
-  'gap-2',
-  'whitespace-nowrap',
-  'rounded-lg',
-  'text-sm',
-  'font-medium',
-  'transition-colors',
-  'cursor-pointer',
-  'outline-offset-2',
-  `outline-[${colors.neutral.border}]`,
-  'focus:outline-2',
-  'disabled:pointer-events-none',
-  'disabled:opacity-50',
-].join(' ')
-
-// Variant styles
-const variantStyles = {
-  primary: [
-    `bg-[${colors.primary.base}]`,
-    'text-white',
-    `hover:bg-[${colors.primary.hover}]/90`,
-    'focus:drop-shadow-lg',
-    `active:bg-[${colors.primary.active}]`,
-    `disabled:bg-[${colors.disabled.background}]`,
-    `disabled:text-[${colors.disabled.text}]`,
-  ].join(' '),
-  
-  secondary: [
-    `bg-[${colors.neutral.background}]`,
-    `text-[${colors.neutral.text}]`,
-    `hover:bg-[${colors.neutral.white}]`,
-    'hover:border-2',
-    `hover:border-[${colors.neutral.border}]`,
-    `focus:bg-[${colors.neutral.white}]`,
-    'focus:border-2',
-    `focus:border-[${colors.neutral.text}]`,
-    `disabled:bg-[${colors.disabled.background}]`,
-    `disabled:text-[${colors.disabled.text}]`,
-  ].join(' '),
-  
-  border: [
-    'border-2',
-    `border-[${colors.neutral.border}]`,
-    'bg-white',
-    `text-[${colors.neutral.gray700}]`,
-    `hover:bg-[${colors.neutral.background}]`,
-    'hover:border-none',
-    `focus:bg-[${colors.neutral.background}]`,
-    'focus:border-none',
-    'active:bg-gray-100',
-    `disabled:bg-[${colors.disabled.background}]`,
-    `disabled:text-[${colors.disabled.text}]`,
-  ].join(' '),
-  
-  menuItem: [
-    'w-full flex items-center gap-3 px-4 py-3 rounded-[20px]',
-    'border border-gray-200 dark:border-gray-700/25',
-    'text-gray-900 dark:text-white',
-    'hover:bg-gray-100 dark:hover:bg-gray-800',
-    'transition-colors',
-    'text-lg',
-  ].join(' '),
-
-  modalCancel: [
-    'px-6 py-2.5 rounded-lg',
-    'bg-gray-100 dark:bg-gray-800',
-    'text-gray-900 dark:text-white font-medium',
-    'hover:bg-gray-200 dark:hover:bg-gray-700',
-  ].join(' '),
-
-  modalAction: [
-    'px-6 py-2.5 rounded-lg',
-    'text-white font-medium',
-    'transition-colors',
-  ].join(' '),
-
-  settingsItem: [
-    'flex items-center w-full px-4 py-3',
-    'text-gray-700 dark:text-gray-300',
-    'hover:bg-gray-100 dark:hover:bg-gray-800',
-    'transition-colors',
-  ].join(' '),
-
-  back: [
-    'flex items-center gap-2',
-    'text-gray-700 dark:text-gray-300',
-    'hover:text-gray-900 dark:hover:text-gray-100',
-    'transition-colors',
-  ].join(' '),
-
-  link: [
-    'font-medium',
-    'transition-colors',
-  ].join(' '),
-
-  ghost: [
-    'transition-colors',
-  ].join(' '),
-}
-
-// Size variants
-const sizeStyles = {
-  default: 'h-10 px-4 py-2',
-  sm: 'h-8 px-3 py-1.5 text-sm',
-  lg: 'h-12 px-6 py-3 text-lg',
-} as const
-
-const buttonVariants = cva(baseButtonStyles, {
-  variants: {
-    variant: variantStyles,
-    size: sizeStyles,
-  },
-  defaultVariants: {
-    variant: 'primary',
-    size: 'default',
-  },
-})
-
-type ButtonProps = React.ComponentProps<"button"> &
-  VariantProps<typeof buttonVariants> & {
-    asChild?: boolean
+const buttonVariants = cva(
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer dark:ring-offset-slate-950 dark:focus-visible:ring-slate-300",
+  {
+    variants: {
+      variant: {
+        default:
+          "bg-slate-900 text-slate-50 hover:bg-slate-900/90 dark:bg-slate-50 dark:text-slate-900 dark:hover:bg-slate-50/90",
+        primary:
+          "bg-blue-600 text-white hover:bg-blue-600/90",
+        destructive:
+          "bg-red-500 text-slate-50 hover:bg-red-500/90 dark:bg-red-900 dark:text-slate-50 dark:hover:bg-red-900/90",
+        outline:
+          "border border-slate-200 bg-white hover:bg-slate-100 hover:text-slate-900 dark:border-slate-800 dark:bg-slate-950 dark:hover:bg-slate-800 dark:hover:text-slate-50",
+        secondary:
+          "bg-slate-100 text-slate-900 hover:bg-slate-100/80 dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800/80",
+        ghost:
+          "hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-slate-50",
+        link:
+          "text-slate-900 underline-offset-4 hover:underline dark:text-slate-50",
+        menu:
+          "w-full justify-start text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800",
+        border:
+          "border border-slate-200 bg-white text-slate-900 hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800",
+      },
+      size: {
+        default: "h-10 px-4 py-2",
+        sm: "h-9 rounded-md px-3",
+        lg: "h-11 rounded-md px-8",
+        icon: "h-10 w-10",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
   }
+)
 
-function Button({
-  className,
-  variant,
-  size,
-  asChild = false,
-  ...props
-}: ButtonProps) {
-  const Comp = asChild ? Slot : "button"
-
-  return (
-    <Comp
-      data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }))}
-      {...props}
-    />
-  )
+interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean
 }
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button"
+    return (
+      <Comp
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+)
+Button.displayName = "Button"
 
 export { Button, buttonVariants, type ButtonProps }
-
