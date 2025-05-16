@@ -1,63 +1,63 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-// Theme configuration
-const theme = {
-  colors: {
-    neutral: {
-      white: '#FFFFFF',
-      background: '#F3F5F8',
-      border: '#CACFD8',
-      text: '#0E121B',
-      placeholder: '#6C727F',
-      hint: '#6C727F',
-    },
-    state: {
-      focus: '#335CFF',
-      error: '#FF3333',
-      disabled: '#F3F5F8',
-      disabledText: '#CACFD8',
-    },
-  },
-  spacing: {
-    input: {
-      height: '11',
-      paddingX: '4',
-      paddingY: '3',
-      iconOffset: '11',
-    },
-  },
-} as const
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  error?: boolean
+  leftIcon?: React.ReactNode
+  rightIcon?: React.ReactNode
+  hint?: React.ReactNode
+  onRightIconClick?: () => void
+}
 
-// Icon components
-const EyeIcon: React.FC = () => (
+const AlertCircleIcon = ({ className }: { className?: string }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="20"
-    height="20"
+    width="24"
+    height="24"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
+    className={className}
+  >
+    <circle cx="12" cy="12" r="10" />
+    <line x1="12" y1="8" x2="12" y2="12" />
+    <line x1="12" y1="16" x2="12.01" y2="16" />
+  </svg>
+)
+
+const EyeIcon = ({ className }: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
   >
     <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
     <circle cx="12" cy="12" r="3" />
   </svg>
 )
 
-const EyeOffIcon: React.FC = () => (
+const EyeOffIcon = ({ className }: { className?: string }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="20"
-    height="20"
+    width="24"
+    height="24"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
+    className={className}
   >
     <path d="M2 2l20 20" />
     <path d="M6.71 6.71a3.5 3.5 0 0 1 4.58 4.58" />
@@ -65,140 +65,82 @@ const EyeOffIcon: React.FC = () => (
   </svg>
 )
 
-// Style configurations
-const styles = {
-  base: {
-    input: [
-      'flex',
-      'w-full',
-      `h-${theme.spacing.input.height}`,
-      `py-${theme.spacing.input.paddingY}`,
-      'text-sm',
-      'bg-white',
-      'rounded-lg',
-      'border-2',
-      `border-[${theme.colors.neutral.border}]`,
-      `text-[${theme.colors.neutral.text}]`,
-      'outline-none',
-      'transition-all',
-      `placeholder:text-[${theme.colors.neutral.placeholder}]`,
-      // States
-      `focus:border-[${theme.colors.state.focus}]`,
-      'focus:ring-2',
-      `focus:ring-[${theme.colors.state.focus}]/20`,
-      // Disabled
-      'disabled:cursor-not-allowed',
-      `disabled:bg-[${theme.colors.state.disabled}]`,
-      `disabled:text-[${theme.colors.state.disabledText}]`,
-      `disabled:border-[${theme.colors.state.disabled}]`,
-      // Error
-      `aria-invalid:border-[${theme.colors.state.error}]`,
-      'aria-invalid:ring-2',
-      `aria-invalid:ring-[${theme.colors.state.error}]/20`,
-    ].join(' '),
-    wrapper: [
-      'relative',
-      'w-full',
-      'flex',
-      'items-center',
-    ].join(' '),
-    hint: [
-      'mt-1.5',
-      'text-sm',
-      `text-[${theme.colors.neutral.hint}]`,
-      `aria-invalid:text-[${theme.colors.state.error}]`,
-    ].join(' '),
-  },
-  icon: {
-    base: [
-      'flex',
-      'items-center',
-      'justify-center',
-      'w-5',
-      'h-5',
-      `text-[${theme.colors.neutral.placeholder}]`,
-      `peer-disabled:text-[${theme.colors.state.disabledText}]`,
-      `peer-aria-invalid:text-[${theme.colors.state.error}]`,
-      'pointer-events-none',
-    ].join(' '),
-    left: 'absolute left-4',
-    right: 'absolute right-4',
-    button: [
-      'cursor-pointer',
-      'hover:opacity-80',
-      'transition-opacity',
-      'pointer-events-auto',
-    ].join(' '),
-  },
-}
-
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  leftIcon?: React.ReactNode
-  rightIcon?: React.ReactNode
-  hint?: string
-  onRightIconClick?: () => void
-}
-
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, leftIcon, rightIcon, hint, onRightIconClick, ...props }, ref) => {
+  ({ className, type, leftIcon, rightIcon, error, hint, onRightIconClick, ...props }, ref) => {
     const [showPassword, setShowPassword] = React.useState(false)
 
-    const isPassword = type === 'password'
-    const effectiveType = isPassword ? (showPassword ? 'text' : 'password') : type
+    const isPassword = type === "password"
 
-    const inputStyles = [
-      styles.base.input,
-      'peer',
-      'px-4',
-      leftIcon && 'pl-11',
-      (rightIcon || isPassword) && 'pr-11',
-      className,
-    ].filter(Boolean)
-
-    const handleRightIconClick = () => {
-      if (isPassword) {
-        setShowPassword(!showPassword)
-      } else if (onRightIconClick) {
-        onRightIconClick()
-      }
+    const handlePasswordToggle = () => {
+      setShowPassword(!showPassword)
     }
-
-    const rightIconClasses = cn(
-      styles.icon.base,
-      styles.icon.right,
-      (isPassword || onRightIconClick) && styles.icon.button
-    )
 
     return (
       <div className="w-full">
-        <div className={styles.base.wrapper}>
+        <div className="relative">
           {leftIcon && (
-            <div className={cn(styles.icon.base, styles.icon.left)}>
+            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
               {leftIcon}
             </div>
           )}
           <input
-            type={effectiveType}
+            type={isPassword ? (showPassword ? "text" : "password") : type}
+            className={cn(
+              "w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm outline-none placeholder:text-slate-400",
+              "transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20",
+              "disabled:cursor-not-allowed disabled:opacity-50",
+              "dark:border-slate-800 dark:bg-slate-950 dark:placeholder:text-slate-500",
+              error && "border-red-500 focus:border-red-500 focus:ring-red-500/20",
+              leftIcon && "pl-10",
+              (rightIcon || isPassword) && "pr-10",
+              className
+            )}
             ref={ref}
-            data-slot="input"
-            className={cn(...inputStyles)}
             {...props}
           />
           {(rightIcon || isPassword) && (
-            <div
-              className={rightIconClasses}
-              onClick={!props.disabled ? handleRightIconClick : undefined}
-              role={isPassword || onRightIconClick ? "button" : undefined}
-              tabIndex={isPassword || onRightIconClick ? 0 : undefined}
-            >
-              {isPassword ? (showPassword ? <EyeOffIcon /> : <EyeIcon />) : rightIcon}
+            <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+              {isPassword ? (
+                <button
+                  type="button"
+                  onClick={handlePasswordToggle}
+                  className="text-slate-400 hover:text-slate-600 dark:text-slate-500 dark:hover:text-slate-300"
+                >
+                  {showPassword ? (
+                    <EyeOffIcon className="h-5 w-5" />
+                  ) : (
+                    <EyeIcon className="h-5 w-5" />
+                  )}
+                </button>
+              ) : (
+                <div
+                  className={cn(
+                    onRightIconClick
+                      ? "cursor-pointer hover:text-slate-900 dark:hover:text-slate-50"
+                      : "pointer-events-none"
+                  )}
+                  onClick={onRightIconClick}
+                >
+                  {rightIcon}
+                </div>
+              )}
             </div>
           )}
         </div>
         {hint && (
-          <p className={cn(styles.base.hint, props['aria-invalid'] && `text-[${theme.colors.state.error}]`)}>
-            {hint}
-          </p>
+          <div className="mt-1 flex items-center gap-1.5">
+            {error && <AlertCircleIcon className="h-4 w-4 text-red-500" />}
+            <p
+              className={cn(
+                "text-sm",
+                error
+                  ? "text-red-500"
+                  : "text-slate-500 dark:text-slate-400"
+              )}
+            >
+              {hint}
+            </p>
+          </div>
         )}
       </div>
     )
@@ -207,4 +149,4 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
 Input.displayName = "Input"
 
-export { Input, type InputProps }
+export { Input }
